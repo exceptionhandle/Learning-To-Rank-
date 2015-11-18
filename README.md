@@ -1,4 +1,4 @@
-# Learning-To-Rank-
+# Learning-To-Rank
 
 Implementation of Linear Regression Model Using Batch and Stochastic Models in Matlab
 =====================================================================================
