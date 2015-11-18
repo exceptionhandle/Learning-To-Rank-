@@ -1,7 +1,7 @@
 # Learning-To-Rank-
 
-Matlab Linear Regression Model Using Batch and Stochastic Models
-================================================================
+Implementation of Linear Regression Model Using Batch and Stochastic Models in Matlab
+=====================================================================================
 For real world dataset, I have used the Microsoft LETOR 4.0 Dataset. LETOR is a package of
 benchmark data sets for research on Learning To Rank released by Microsoft Research Asia.
 
