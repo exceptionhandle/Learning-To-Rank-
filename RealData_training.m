@@ -57,8 +57,6 @@ trainPer1 = sqrt(2 * E_W / N1)
 save x.mat w1 lambda1 sigmaINV M1 mu1 D X t row col
 validPer1 = Validation
 
-%%%%%%%%Stochastic
-
 %%%%%%%%%%%%%%%%%Stochastic
 p = randperm(E,M1);
 target = t(1:E);
@@ -78,33 +76,23 @@ w01(1:M1,1) = 0;
 %%%%%%%
 
 wx=w01;
-eta1(1,1)=1.00008;
-Err = 0;
+eta1(1,1)=0.001;
 for i = (1:E)
-Err2 = t(i,1) - (wx)' * phi(i,:)';
 if(i>1)
-euclidean = norm(dw1(:,i-1));
-if( Err > 0)
-    eta1(1,i)=eta1(1,i-1)/1.145;
-else
-    eta1(1,i)=eta1(1,i-1)*1.00001;
-end
-end
-if i > 1 && norm(wx-w1) < 0.001
-    eta1(1,i)=0;
+    euclidean = norm(dw1(:,i-1));
+    eta1(1,i)=eta1(1,i-1);
 end
 
-Err = Err2;
+Err2 = ( t(i,1) - (wx)' * phi(i,:)' );
+%% calculating partial derivative of weight with regularization hyper parameter lambda1
 DeltaE = -Err2 * phi(i,:)' + (1/E)*lambda1 * wx;
 
 DeltaW = -eta1(1,i) * DeltaE;
 dw1(:,i) = DeltaW;
 wx = wx + DeltaW;
 end
-euclideanInit = norm(w01 - w1)
-euclideanLast = norm(wx - w1)
 
-
+%% Calculating Root mean squared error
 ED_W=0;E_W=0;EW_W=0;
 for i = (1:E)
     
